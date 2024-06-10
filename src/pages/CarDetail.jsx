@@ -24,7 +24,7 @@ export default function CarDetail() {
 
   useEffect(() => {
     if (user) {
-      handleFetchClient(user.client_id);
+      handleFetchClient(user.id);
     }
   }, [user]);
 
@@ -102,7 +102,7 @@ export default function CarDetail() {
                 Cotizar
               </button>
             </Link>
-          ) : Object.keys(client).length > 0 ? (
+          ) : client ? (
             <Link to={`/vehicle_quotation/${car.id}`}>
               <button className="bg-green-600 rounded p-2 w-[50%] mx-auto block">
                 Cotizar

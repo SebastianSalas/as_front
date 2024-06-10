@@ -12,7 +12,6 @@ export default function VehicleQuotation() {
   const [selectedOptionOfficie, setSelectedOptionOfficie] = useState("");
   const [filteredOffices, setFilteredOffices] = useState([]);
   const [client, setClient] = useState([]);
-  
 
   let { cities, offices, user } = useContext(AuthContext);
 
@@ -29,7 +28,7 @@ export default function VehicleQuotation() {
   };
   useEffect(() => {
     if (user) {
-      handleFetchClient(user.client_id);
+      handleFetchClient(user.id);
     }
   }, [user]);
 
@@ -54,7 +53,7 @@ export default function VehicleQuotation() {
     const fetchCar = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/vehicle/${id}/show`
+          `http://localhost:8001/api/vehicle/${id}/show`
         );
         setCar(response.data);
       } catch (error) {
@@ -72,12 +71,11 @@ export default function VehicleQuotation() {
     console.log(selectedOptionCity);
     console.log(car.id);
     let response = await axios.post(
-      "http://localhost:8000/api/vehicle_quotation/create",
+      "http://localhost:8001/api/vehicle_quotation/create",
       {
         office: selectedOptionOfficie,
         city: selectedOptionCity,
         vehicle: car.id,
-        client: client.id,
       },
       {
         headers: {

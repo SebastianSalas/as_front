@@ -23,13 +23,13 @@ export default function VehicleQuotationsIndexPage() {
 
   useEffect(() => {
     if (user) {
-      handleFetchStaffMember(user.staff_member_id);
+      handleFetchStaffMember(user.id);
     }
   }, [user]);
 
   let updateVehicleQuotation = async (id) => {
     let response = await axios.patch(
-      `http://localhost:8000/api/vehicle_quotation/${id}/edit/`,
+      `http://localhost:8001/api/vehicle_quotation/${id}/edit/`,
       {
         vendor: staffMember.id,
       },
@@ -51,7 +51,7 @@ export default function VehicleQuotationsIndexPage() {
   const getVehicleQuotationsAssigned = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/vehicle_quotations/vendor/${id}/`
+        `http://localhost:8001/api/vehicle_quotations/vendor/${id}/`
       );
       setQuotations(response.data);
       navigate("/vehicle_quotations");
@@ -65,7 +65,7 @@ export default function VehicleQuotationsIndexPage() {
     const fetchVehicleQuotations = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/vehicle_quotations"
+          "http://localhost:8001/api/vehicle_quotations"
         );
         setVehicleQuotations(response.data);
       } catch (error) {
@@ -99,9 +99,6 @@ export default function VehicleQuotationsIndexPage() {
                   ID
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
-                  Cliente
-                </th>
-                <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
                   Oficina
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
@@ -123,12 +120,6 @@ export default function VehicleQuotationsIndexPage() {
                     <td className="px-6 py-4 text-center">
                       <p className=" w-full text-sm leading-5 font-medium text-gray-900">
                         {quotation.id}
-                      </p>
-                    </td>
-                    <td className="px-6 py-4 text-center">
-                      <p className=" w-full text-sm leading-5 font-medium text-gray-900">
-                        {quotation.client_name}
-                        {quotation.client_last_name}
                       </p>
                     </td>
                     <td className="px-6 py-4 whitespace-no-wrap text-center">
@@ -176,9 +167,6 @@ export default function VehicleQuotationsIndexPage() {
                   ID
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
-                  Cliente
-                </th>
-                <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
                   Oficina
                 </th>
                 <th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider text-center">
@@ -202,12 +190,7 @@ export default function VehicleQuotationsIndexPage() {
                         {quotation.id}
                       </p>
                     </td>
-                    <td className="px-6 py-4 text-center">
-                      <p className=" w-full text-sm leading-5 font-medium text-gray-900">
-                        {quotation.client_name}
-                        {quotation.client_last_name}
-                      </p>
-                    </td>
+                    <td className="px-6 py-4 text-center"></td>
                     <td className="px-6 py-4 whitespace-no-wrap text-center">
                       <p className="text-sm leading-5 text-gray-900">
                         {quotation.office_name}

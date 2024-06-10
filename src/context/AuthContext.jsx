@@ -81,7 +81,6 @@ export const AuthProvider = ({ children }) => {
         name: e.target.name.value,
         last_name: e.target.last_name.value,
         document: e.target.cedula.value,
-        phone_number: e.target.telephone.value,
         document_type_id: 1,
         password: e.target.password.value,
         user_type_id: 1,
@@ -164,25 +163,25 @@ export const AuthProvider = ({ children }) => {
   // };
 
   // -------------- LIST MODELS -----------------
-  useEffect(() => {
-    const fetchStaffMembers = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/staff_members/"
-        );
-        setStaffMembers(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchStaffMembers = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:8000/api/staff_members/"
+  //       );
+  //       setStaffMembers(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchStaffMembers();
-  }, []);
+  //   fetchStaffMembers();
+  // }, []);
 
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/cities/");
+        const response = await axios.get("http://localhost:8001/api/cities/");
         setCities(response.data);
       } catch (error) {
         console.error(error);
@@ -196,7 +195,7 @@ export const AuthProvider = ({ children }) => {
     const fetchCompanyPositions = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/company_positions/"
+          "http://localhost:8001/api/company_positions/"
         );
         setCompanyPositions(response.data);
       } catch (error) {
@@ -210,7 +209,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchOffices = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/offices/");
+        const response = await axios.get("http://localhost:8001/api/offices/");
         setOffices(response.data);
       } catch (error) {
         console.error(error);
@@ -244,7 +243,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    let fourMinutes = 1000 * 60 * 4;
+    let fourMinutes = 1000 * 60 * 15;
     let interval = setInterval(() => {
       if (authTokens) {
         updateToken();
